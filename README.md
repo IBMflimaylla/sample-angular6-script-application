@@ -1,27 +1,46 @@
-# PocSp
+1.	Tener instalado el angular CLI, si no lo tienes instalado
+	sudo npm install -g @angular/cli
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+2.	Crear una aplicación nueva
+    ng new demo-angular6
 
-## Development server
+3.	Ingresar a la ruta
+    cd ./demo-angular6
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+4.	Levantar la aplicación (localhost:4200)
+    ng serve
 
-## Code scaffolding
+5.	Compilar para producción
+    ng build –buildOptimizer –aot
+Genera archivos en la carpeta /dist
+https://github.com/angular/angular-cli/issues/9016
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+En este caso debemos usar buildOptimizer porque sino el archivo vendor.js es muy grande y no se puede subir a WCM, un archivo JS solo puede pesar máximo 2MB
+https://developer.ibm.com/answers/questions/365041/error-nt6577e%20-the-value-for-the-binary-property-ib.html%29/
 
-## Build
+6.	Agregar el data-scriptportlet-combine-urls="true" al index.html de la aplicación
+https://github.com/OpenNTF/Script-Portlet-Node-Samples/blob/master/samples/angular_contacts/index.html
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Habilitar trazas en WebSphere Portal para WCM
+http://www-01.ibm.com/support/docview.wss?uid=swg21673017
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+7.	Configurar el ambiente WebSphere Portal
 
-## Running end-to-end tests
+Resource environment provider -> WCM WCMConfigService, crear estas dos propiedades
+dynamic.parameter.tag.enabled
+renderingplugin.shortform.enabled
+ambas con valor false
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+8.	Configurar command push line
+https://developer.ibm.com/answers/questions/365041/error-nt6577e%20-the-value-for-the-binary-property-ib.html%29/
 
-## Further help
+9.	Establecerse dentro de la carpeta /dist del proyecto de angular
+Ejecutar el comando sp push -wcmContentName “Angular 6 Demo”
+https://developer.ibm.com/answers/questions/365041/error-nt6577e%20-the-value-for-the-binary-property-ib.html%29/
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+10.	Crear una página en WebSphere Portal y establecer permisos
+11.	Agregar a la página un Visor de Contenido Web
+12.	Asociar el script portlet al visor de contenido web
+
+13.	Ingresar a la página.
